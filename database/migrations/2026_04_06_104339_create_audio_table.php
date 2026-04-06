@@ -9,10 +9,13 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+  public function up()
     {
-        Schema::create('audio', function (Blueprint $table) {
+        Schema::create('audios', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('section_id')->constrained()->onDelete('cascade');
+            $table->string('file_path');          
+            $table->integer('duration_seconds')->nullable();
             $table->timestamps();
         });
     }

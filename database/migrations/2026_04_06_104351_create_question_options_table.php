@@ -9,14 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+ public function up()
     {
         Schema::create('question_options', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('question_id')->constrained()->onDelete('cascade');
+            $table->string('option_text');
+            $table->boolean('is_correct')->default(false);
+            $table->string('label')->nullable();   // A, B, C, D or matching label like "i", "ii"
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */
